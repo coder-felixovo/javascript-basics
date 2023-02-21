@@ -1,0 +1,19 @@
+<head>
+  <title>this绑定的优先级 new绑定vs显示绑定</title>
+</head>
+
+<body>
+  <script>
+    function bar(num) {
+      this.num = num
+    }
+    var objA = {}
+    var funcA = bar.bind(objA)
+    funcA(1)
+    console.log(objA.num) // 1
+    var objB = new funcA(2)
+    console.log(objA.num) // 1
+    console.log(objB.num) // 2
+    // 优先级：new绑定 > 显示绑定
+  </script>
+</body>

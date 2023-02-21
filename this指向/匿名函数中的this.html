@@ -1,0 +1,50 @@
+<head>
+  <title>匿名函数中的this</title>
+</head>
+
+<body>
+  <div class="test" style="width: 50px; height: 50px; background-color: lightpink"></div>
+
+  <script>
+    // eg1
+    document.querySelector('.test').addEventListener('click', function () {
+      console.log(this) // div element
+    })
+    document.querySelector('.test').addEventListener('click', () => {
+      console.log(this) // window
+    })
+
+    // eg2
+    var foo = {
+      name: 'Foo',
+      getThis: function () {
+        console.log(this) // this => object `foo`
+        return function () {
+          console.log(this) // this => window
+        }
+      },
+    }
+    foo.getThis()()
+
+    var bar = {
+      name: 'Bar',
+      getThis: function () {
+        return () => {
+          console.log(this) // this => object `bar`
+        }
+      },
+    }
+    bar.getThis()()
+
+    var baz = {
+      name: 'Baz',
+      getThis: () => {
+        console.log(this) // this => window
+        return () => {
+          console.log(this) // this => window
+        }
+      },
+    }
+    baz.getThis()()
+  </script>
+</body>

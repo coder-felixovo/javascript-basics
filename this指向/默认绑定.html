@@ -1,0 +1,26 @@
+<head>
+  <title>this指向 默认绑定</title>
+</head>
+
+<body>
+  <script>
+    var year = 2022
+    // year === window.year
+
+    function printYear() {
+      console.log(this.year) // 2022
+    }
+    // printYear === window.printYear
+
+    function printYearInStrict() {
+      'use strict'
+      // this => undefined
+      // TypeError: Cannot read properties of undefined
+      console.log(this.nextYear)
+    }
+    // printYearInStrict === window.printYearInStrict
+
+    printYear()
+    printYearInStrict()
+  </script>
+</body>

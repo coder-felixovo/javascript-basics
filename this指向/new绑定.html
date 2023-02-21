@@ -1,0 +1,48 @@
+<head>
+  <title>this指向 new绑定</title>
+</head>
+<body>
+  <script>
+    // eg1
+    function Dog(name) {
+      this.name = name
+    }
+    var huskie = new Dog('Huskie')
+    console.log(huskie.name) // "Huskie"
+
+    // eg2
+    function Cat() {
+      this.family = 'Felidae'
+      return {
+        name: 'persian cat',
+        context: this,
+        getThis: function () {
+          return this
+        },
+      }
+    }
+    var cat = new Cat()
+    console.log(cat.family) // undefined
+    console.log(cat.name) // "persian cat"
+    console.log(cat.context) // Cat {}
+    console.log(cat.getThis()) // // Function `Cat` returns object
+
+    // eg3
+    function ReturnSimple() {
+      this.crop = 'wheat'
+      return 1
+    }
+    var instance = new ReturnSimple()
+    console.log(instance.crop) // "wheat"
+    // this => instance object
+
+    // eg4
+    function ReturnNull() {
+      this.crop = 'carrot'
+      return null
+    }
+    var instance2 = new ReturnNull()
+    console.log(instance2.crop) // "carrot"
+    // although `null` is object, but this => instance object
+  </script>
+</body>

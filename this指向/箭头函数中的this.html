@@ -1,0 +1,25 @@
+<head>
+  <title>箭头函数中的this</title>
+</head>
+
+<body>
+  <script>
+    function foo() {
+      console.log('1️', this) // this => window
+      const bar = () => {
+        console.log('2️', this) // this => window
+      }
+      bar()
+    }
+    foo()
+
+    const baz = () => {
+      console.log(this) // this => window
+    }
+    baz()
+
+    const obj = {}
+    baz.bind(obj) // Can't change this in arrow function
+    baz()
+  </script>
+</body>

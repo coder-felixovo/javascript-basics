@@ -1,0 +1,19 @@
+<head>
+  <title>this指向 隐式绑定</title>
+</head>
+
+<body>
+  <script>
+    var dog = {
+      name: 'Huskie',
+      action: {
+        bark: function () {
+          console.log(this.name)
+        },
+      },
+    }
+
+    // this => dog.action, and it doesn't have variable `name`
+    dog.action.bark() // undefined
+  </script>
+</body>

@@ -1,0 +1,21 @@
+<head>
+  <title>this绑定优先级 隐式绑定vs显示绑定</title>
+</head>
+
+<body>
+  <script>
+    function fn() {
+      console.log(this.num)
+    }
+    var obj1 = {
+      num: 1,
+      fn,
+    }
+    var obj2 = {
+      num: 2,
+    }
+    obj1.fn.call(obj2) // 2
+    obj1.fn() // 1
+    // 优先级：显示绑定 > 隐式绑定
+  </script>
+</body>

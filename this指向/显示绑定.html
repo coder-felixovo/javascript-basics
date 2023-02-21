@@ -1,0 +1,20 @@
+<head>
+  <title>this指向 显示绑定</title>
+</head>
+
+<body>
+  <script>
+    function getName() {
+      console.log(this.age)
+    }
+
+    // this => window
+    getName() // undefined
+
+    // this => person
+    var person = {
+      age: 22,
+    }
+    getName.call(person) // 22
+  </script>
+</body>
