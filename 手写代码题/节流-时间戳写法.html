@@ -1,0 +1,28 @@
+<head>
+  <title>节流 时间戳写法</title>
+</head>
+<body>
+  <script>
+    // 时间戳写法
+    // 当触发事件时，获取当前时间和上次执行时间的差值，如果大于等于设定的时间间隔，
+    // 就执行回调函数，并更新上次执行时间，否则不执行。
+    // func 回调函数
+    // wait 等待时间
+    function throttle(func, wait) {
+      let previous = 0
+      return function () {
+        let now = Date.now()
+        if (now - previous >= wait) {
+          func.apply(this, arguments)
+          previous = now
+        }
+      }
+    }
+    window.addEventListener(
+      'click',
+      throttle(function () {
+        console.log('你点击了窗口')
+      }, 1000)
+    )
+  </script>
+</body>

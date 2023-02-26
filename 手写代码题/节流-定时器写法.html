@@ -1,0 +1,40 @@
+<head>
+  <title>节流 定时器写法</title>
+</head>
+<body>
+  <script>
+    // 定时器写法
+    // 当触发事件时，如果没有设置执行回调函数的定时器，就创建一个；
+    // 当定时器中的回调函数被执行后，就清除定时器，以便下次触发事件重新设置。
+    // func 回调函数
+    // wait 等待时间
+    function throttle(func, wait) {
+      let timeout = null // 定时器变量
+      return function () {
+        if (!timeout) {
+          timeout = setTimeout(() => {
+            timeout = null
+            func.apply(this, arguments)
+          }, wait)
+        }
+      }
+    }
+    window.addEventListener(
+      'click',
+      throttle(function () {
+        console.log('你点击了窗口')
+      }, 1000)
+    )
+  </script>
+</body>
+
+<!-- 
+  节流 throttle
+    在一定的时间内只能执行一次回调函数，可以减少函数不必要的重复调用。
+
+  应用场景：
+    当用户执行一个平滑或连续的事件时，例如滚动或调整大小，在这种情况下，
+    可以使用节流函数来控制事件处理函数的调用频率。
+    例如：有个滚动的页面，当用户向下滚动时，需要向页面添加更多内容，在这种情况下，
+    使用节流可以减少过多的网络请求和页面重绘。
+-->

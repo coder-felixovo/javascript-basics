@@ -1,0 +1,44 @@
+<head>
+  <title>防抖 非立即执行</title>
+</head>
+<body>
+  <script>
+    // func 回调函数
+    // delay 延迟时间
+    function debounce(func, delay) {
+      let timer = null // 定时器变量
+      return function () {
+        let context = this // 保存当前上下文
+        let args = arguments // 保存当前参数
+        if (timer) {
+          clearTimeout(timer) // 已有定时器，清除
+        }
+        timer = setTimeout(function () {
+          // 设置新定时器
+          func.apply(context, args) // 延迟时间后执行回调函数，并绑定上下文和参数
+        }, delay)
+      }
+    }
+    window.addEventListener(
+      'click',
+      debounce(function () {
+        console.log('你点击了窗口')
+      }, 1000)
+    )
+  </script>
+</body>
+
+<!-- 
+  防抖 debounce 
+    指在一定的时间内，事件触发后只执行一次回调函数，如果在这段时间内又触发了同样的事件，则重新计算延迟时间。
+
+  举例：
+    游戏中的回城可以认为是防抖，在回城读秒过程中，如果再次执行回城操作，那么会重新读秒，
+    在整个读秒过程中都没有再执行回城操作，等到读秒结束，回城成功。
+
+  应用场景：
+    1. 监听浏览器滚动事件。
+    2. 输入框频繁输入内容、搜索或提交信息。
+    3. 频繁点击按钮，触发某个事件。
+    4. 监听用户缩放浏览器resize事件。
+-->
