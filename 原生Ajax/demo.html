@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原生Ajax</title>
+  </head>
+  <body>
+    <button id="btn">发起Ajax请求</button>
+    <script>
+      const btn = document.querySelector('#btn')
+      function sendAjax() {
+        var xhr
+        if (window.XMLHttpRequest) {
+          xhr = new XMLHttpRequest()
+        } else if (window.ActiveXObject) {
+          xhr = new ActiveXObject('Microsoft.XMLHTTP')
+        }
+        if (!xhr) {
+          console.error('Cannot create an XMLHTTP instance')
+          return false
+        }
+
+        // 0  UNSENT  Client has been created, open() not called yet.
+        console.log('a', xhr.readyState)
+
+        // 1  OPENED  open() has been called.
+        xhr.open('GET', 'http://localhost:3000/test_ajax')
+        console.log('b', xhr.readyState) // 1
+
+        xhr.onreadystatechange = function () {
+          // 2  HEADERS_RECEIVED  send() has been called, and headers and status are available
+          // 3  LOADING  Dowloading responseText holds partial data.
+          // 4  DONE  The operation is complete.
+          console.log('d', xhr.readyState) // 2 3 4
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log(xhr)
+            } else {
+              console.error('There was a problem with the request.')
+            }
+          }
+        }
+        xhr.send()
+        console.log('c', xhr.readyState) // 1
+      }
+      btn.addEventListener('click', sendAjax)
+    </script>
+  </body>
+</html>
