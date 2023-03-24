@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型链继承</title>
+  </head>
+  <body>
+    <script>
+      /* 原型链继承 */
+
+      function Parent() {
+        this.parent = 'SuperClass'
+        this.list = [1]
+      }
+
+      Parent.prototype.speak = function () {
+        console.log('hello')
+      }
+
+      Parent.prototype.obj = { a: 0 }
+
+      function Child(name) {
+        this.name = name
+        this.child = 'SubClass'
+      }
+
+      Child.prototype = new Parent() // 父函数实例作为子函数的原型对象
+
+      const child1 = new Child('John')
+      const child2 = new Child('Merry')
+
+      child1.child = 'SubClass-update' // 只是修改自身的`child`属性
+      child1.parent = 'SuperClass-update' // 并未访问原型上的属性，只是在自身上添加属性
+      // 如果是 child1.obj = {}，child2仍会输出{ a: 0 }
+
+      child1.list.push(2)
+      child1.obj.a = 97
+
+      console.log(child1)
+      // Child { child: 'SubClass-update', parent: 'SuperClass-update' }
+      child2.speak()
+      console.log(child2.child) // "SubClass"
+      console.log(child2.parent) // "SuperClass"
+      console.log(child2.list) // [ 1, 2 ]
+      console.log(child2.obj) // { a: 97 }
+    </script>
+  </body>
+</html>

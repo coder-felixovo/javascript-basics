@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>构造函数继承</title>
+  </head>
+  <body>
+    <script>
+      /* 构造函数继承 */
+
+      function Parent(name) {
+        this.name = name
+        this.list = [1]
+      }
+
+      Parent.prototype.year = 2023
+      Parent.prototype.speak = function () {
+        console.log('hello')
+      }
+
+      function Child(name) {
+        Parent.call(this, name)
+      }
+
+      const child1 = new Child('John')
+      const child2 = new Child('Merry')
+
+      child1.list.push(2)
+      child1.year = '2023-update' // 只是在自身上添加year属性
+
+      console.log(child1)
+      // { name: "John", year: "2023-update", list: [1, 2] }
+      console.log(child2)
+      // { name: "Merry",  list: [1] }
+      console.log(child2.year) // undefined
+      console.log(child2.speak()) // child2.speak is not a function
+    </script>
+  </body>
+</html>

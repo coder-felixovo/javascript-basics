@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组合继承</title>
+  </head>
+  <body>
+    <script>
+      /* 组合继承 */
+
+      function Parent(name) {
+        this.name = name
+        this.list = [1]
+      }
+
+      Parent.prototype.year = 2023
+      Parent.prototype.nums = [100]
+      Parent.prototype.speak = function () {
+        console.log('hello')
+      }
+
+      function Child(name) {
+        Parent.call(this, name) // 第二次调用
+      }
+
+      Child.prototype = new Parent() // 第一次调用
+
+      const child1 = new Child('child1')
+      const child2 = new Child('child2')
+
+      child1.name = 'child1-update'
+      child1.year = '2023-update'
+      child1.list.push(2)
+      child1.nums.push(50)
+
+      console.log(child1)
+      // Child { name: 'child1-update', list: [ 1, 2 ], year: '2023-update' }
+      console.log(child2)
+      // Child { name: 'child2', list: [ 1 ] }
+      console.log(child2.year) // 2023
+      child2.speak() // "hello"
+      console.log(child2.nums) // [ 100, 50 ]
+    </script>
+  </body>
+</html>

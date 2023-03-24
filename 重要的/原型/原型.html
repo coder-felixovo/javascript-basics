@@ -1,0 +1,52 @@
+<head>
+  <title>JavaScript 原型</title>
+</head>
+<body>
+  <script>
+    // 一个构造函数
+    function Animal() {}
+
+    // 在JavaScript中，每一个函数都具有一个prototype属性，该属性是一个对象，即原型对象
+    console.log(Animal.prototype)
+
+    // 原型对象有一个constructor属性，指向原型对象所在函数
+    console.log(Animal.prototype.constructor) // ƒ Animal() {}
+    console.log(Animal.prototype.constructor === Animal) // true
+
+    // 生成实例
+    var animal = new Animal()
+
+    // 实例对象的__proto__指向构造函数的原型对象
+    console.log(animal.__proto__)
+    console.log(animal.__proto__ === Animal.prototype) // true
+
+    // 函数的__proto__由Function创建
+    console.log(Animal.__proto__) // ƒ () { [native code] }
+
+    // 函数也是一个函数对象，通过Function构造函数创建的
+    console.log(Animal.__proto__)
+    console.log(Animal.__proto__ === Function.prototype) // true
+
+    // 原型对象通过Object构造函数创建
+    console.log(Animal.prototype.__proto__)
+    console.log(Animal.prototype.__proto__ === Object.prototype) // true
+
+    // Object对象通过Function函数创建
+    console.log(Object.__proto__) // ƒ () { [native code] }
+    console.log(Object.__proto__ === Function.prototype) // true
+
+    // Object的原型对象上有__proto__属性，指向null，为原型链顶端
+    console.log(Object.prototype.__proto__)
+
+    // Function.prototype 和 Function.__proto__同时指向内置匿名函数，这样原型链的终点就是null
+    console.log(Function.prototype === Function.__proto__) // true
+
+    /*  
+      总结：
+        1. prototype相对函数而言
+        2. __proto__相对实例而言
+        3. 一切对象继承自Object对象
+        4. Object对象继承自Function 
+    */
+  </script>
+</body>

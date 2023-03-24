@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型式继承</title>
+  </head>
+  <body>
+    <script>
+      /* 原型式继承 */
+
+      function prototypalInheritance(parent, name) {
+        // 一个临时的构造函数
+        function F() {
+          this.name = name
+        }
+        F.prototype = parent
+        return new F()
+      }
+
+      var parent = {
+        prop: 'SuperClass',
+        list: [1, 2],
+        speak: function () {
+          console.log('hello')
+        },
+      }
+
+      var child1 = prototypalInheritance(parent, 'John')
+      // `ES5`新增了`Object.create()`方法规范了原型式继承
+      // 上面的代码也可改为
+      var child2 = Object.create(parent)
+      child1.list.push(3)
+      console.log(child2.list[2]) // 3
+      child2.speak() // "hello"
+      console.log(child1)
+      // { name: "John" }
+      console.log(child2)
+      // {}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>寄生组合式继承</title>
+  </head>
+  <body>
+    <script>
+      /* 寄生组合式继承 */
+
+      function Parent(name) {
+        this.name = name
+        this.parent = 'SuperClass'
+        this.nums = [1, 2]
+      }
+
+      Parent.prototype.speak = function () {
+        console.log('hello')
+      }
+
+      function Child(name) {
+        this.child = 'SubClass'
+        Parent.call(this, name)
+      }
+
+      Child.prototype = Object.create(Parent.prototype)
+
+      Child.prototype.run = function () {
+        console.log('running')
+      }
+
+      var child1 = new Child('John')
+      var child2 = new Child('Merry')
+
+      child1.nums.push(3)
+      console.log(child1)
+      console.log(child1.nums)
+      // [1, 2, 3]
+      console.log(child2.nums)
+      // [1, 2]
+      child2.speak() // "hello"
+      child2.run() // "running"
+    </script>
+  </body>
+</html>
