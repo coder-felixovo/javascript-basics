@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浏览器中的顶层对象</title>
+  </head>
+  <body>
+    <script>
+      // 在浏览器环境中，顶层对象是`Window`对象，
+      // 在ES5中，顶层对象属性与全局变量等价。
+      var year = 2022
+      console.log(year === window.year) // true
+
+      // 在ES6中，为了保持兼容性，var和function声明的全局变量，依旧是顶层对象属性，
+      // 而let、const、class声明的全局变量，不属于顶层对象属性
+      let nextYear = 2023
+      console.log(window.nextYear) // undefined
+    </script>
+  </body>
+</html>
