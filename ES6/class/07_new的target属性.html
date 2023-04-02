@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ES6为new提供了一个target属性，该属性一般返回new命令作用于的构造函数
+      // 如果构造函数不是通过new或Reflect.construct()调用，则返回undefined
+      function Foo(name) {
+        // if里的条件也可以写成 new.target === Foo
+        if (new.target !== undefined) {
+          console.log(1, new.target)
+          this.name = name
+        } else {
+          throw new Error('必须使用new命令生成Foo实例')
+        }
+      }
+      var bar = new Foo('Bar')
+      // var baz = Foo('Baz') // 报错
+
+      class Bar {
+        constructor(name) {
+          // class内部调用new.target会返回当前类
+          console.log(new.target)
+          console.log(new.target === Bar)
+          this.name = name
+        }
+      }
+      var foo = new Bar('foo')
+
+      // 注意，如果子类继承了父类，new.target返回子类
+      class Baz extends Bar {
+        constructor(name) {
+          super(name)
+        }
+      }
+      var a = new Baz('a')
+
+      // 利用上面这个特点，可以写出：必须使用继承后的类
+      class Animal {
+        constructor(name) {
+          if (new.target === Animal) {
+            throw Error('Animal类不能够实例化')
+          }
+        }
+      }
+      class Dog extends Animal {
+        constructor(name) {
+          super(name)
+        }
+      }
+      var huskie = new Dog('huskie')
+      console.log(huskie)
+      var animal = new Animal('cat') // 报错
+    </script>
+  </body>
+</html>

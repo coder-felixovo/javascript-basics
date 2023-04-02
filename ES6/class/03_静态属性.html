@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class 静态属性</title>
+  </head>
+  <body>
+    <script>
+      class School {}
+      // 静态属性，即类本身的属性
+      // ES6规定，类内部有静态方法，但没有静态属性
+      // 目前只有如下写法
+      School.name = 'JavaScript school'
+      console.log(School.name)
+
+      // 有提案提供了类的静态属性，即写在class内的实例属性之前，加上static关键字
+      // 显而易见，以下这种写法优于上面的写法，上面的写法容易忽略静态属性
+      {
+        class School {
+          static name = 'static JavaScript school'
+        }
+        console.log(School.name)
+      }
+    </script>
+  </body>
+</html>

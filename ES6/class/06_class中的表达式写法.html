@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class中的表达式写法</title>
+  </head>
+  <body>
+    <script>
+      var methodName = 'speak'
+      class People {
+        constructor(name) {
+          this.name = name
+        }
+        // 属性名可以使用表达式
+        [methodName]() {
+          console.log('hello')
+        }
+      }
+      var lucy = new People('Lucy')
+      lucy.speak() // "hello"
+
+      // 类也可以使用表达式定义
+      const mySchool = class School {
+        static name = 'JavaScript school'
+        getSchoolName() {
+          return School.name
+        }
+      }
+      // 注意，School只能够在其内部引用，指向当前类
+      // 在外部，需要通过mySchool引用
+      var school = new mySchool()
+      console.log(school.getSchoolName()) // "JavaScript school"
+      // School.name // 报错 ReferenceError
+
+      // 如果School的内部没有引用到School，则可以省略School
+    </script>
+  </body>
+</html>

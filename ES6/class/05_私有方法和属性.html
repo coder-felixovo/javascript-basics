@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class 私有方法和属性</title>
+  </head>
+  <body>
+    <script>
+      // 私有方法和属性，即只能在类的内部访问，外部不能够访问
+      // 有提案提供私有成员表示，在属性前加#
+      class Counter {
+        #count = 0
+        get value() {
+          console.log('getter')
+          return this.#count
+        }
+        #increment() {
+          this.#count++
+        }
+        _increment() {
+          this.#increment()
+        }
+      }
+      var counter = new Counter()
+      console.log(counter.value) // "getter" 0
+      // counter.#increment() // 报错
+      counter._increment()
+      console.log(counter.value) // "getter" 1
+      // console.log(counter.#count) // 报错
+      // counter.#count = 2 // 报错
+    </script>
+  </body>
+</html>

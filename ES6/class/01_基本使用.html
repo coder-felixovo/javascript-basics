@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class 基本使用</title>
+  </head>
+  <body>
+    <script>
+      class Student {
+        // 类必须且只有一个constructor方法
+        // 如果没有提供，会默认提供一个空的constructor方法
+        // 构造方法，this -> 实例对象
+        constructor(name) {
+          this.name = name
+        }
+
+        // 方法前无需加关键字function
+        speak() {
+          console.log(`Hello, my name is ${this.name}`)
+        }
+      }
+
+      // 类必须使用关键字new创建实例
+      var stu = new Student('John')
+      console.log(stu)
+      stu.speak()
+
+      // class的数据类型是function
+      console.log(typeof Student) // "function"
+
+      console.log(Student === Student.prototype.constructor) // true
+      console.log(stu.constructor === Student.prototype.constructor) // true
+
+      // 类内部定义的方法都是non-enumerable
+      console.log(stu.propertyIsEnumerable('speak')) // false
+    </script>
+  </body>
+</html>

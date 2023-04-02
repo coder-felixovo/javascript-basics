@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class 静态方法</title>
+  </head>
+  <body>
+    <script>
+      class Student {
+        // 在方法名前使用关键字static修饰，表示静态方法
+        // 父类的静态方法可以被子类继承
+        static introduce() {
+          console.log("I'm Student class")
+          console.log(this) // this -> Student类
+          this.sayGoodBye()
+        }
+
+        static sayGoodBye() {
+          console.log('goodbye')
+        }
+
+        constructor(name) {
+          this.name = name
+        }
+
+        // introduce() {
+        //   console.log(`Hello, my name is ${this.name}`)
+        // }
+      }
+
+      // 静态方法直接使用类调用：类.方法名
+      Student.introduce() // "I'm Student class"
+
+      // 在实例上调用
+      // 1. 如果没有同名实例方法，会抛出TypeError，提示不是一个函数
+      // 2. 有同名实例方法，则执行该方法
+      var stu = new Student()
+      // stu.introduce()
+    </script>
+  </body>
+</html>
