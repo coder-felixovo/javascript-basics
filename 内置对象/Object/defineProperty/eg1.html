@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eg1</title>
+  </head>
+  <body>
+    <script>
+      // e.g.1
+      const obj = {
+        name: '漩涡鸣人',
+      }
+
+      // 修改已存在的属性
+      const res = Object.defineProperty(obj, 'name', {
+        value: '漩涡鸣人-update',
+      })
+
+      // 定义一个新的属性
+      const res2 = Object.defineProperty(obj, 'level', {
+        value: '第七代火影',
+      })
+
+      // 指向同一个地址
+      console.log(obj === res) // true
+      console.log(obj === res2) // true
+
+      console.log(obj.name + '-' + obj.level)
+      // "漩涡鸣人-update-第七代火影"
+    </script>
+  </body>
+</html>

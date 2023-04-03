@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eg3</title>
+  </head>
+  <body>
+    <script>
+      // e.g.3
+      const obj3 = {
+        name: '宇智波佐助',
+      }
+      // 报错
+      // TypeError: Invalid property descriptor. Cannot both specify accessors and a value or writable attribute
+      Object.defineProperty(obj3, 'level', {
+        value: '六道级',
+        get: function () {
+          return '六道级'
+        },
+      })
+    </script>
+  </body>
+</html>

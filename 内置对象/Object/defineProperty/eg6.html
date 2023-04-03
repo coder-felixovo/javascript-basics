@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eg6</title>
+  </head>
+  <body>
+    <script>
+      // e.g.6
+      const obj6 = {}
+      Object.defineProperty(obj6, 'name', {
+        value: '照美冥',
+        writable: true,
+        configurable: false,
+      })
+
+      console.log('aaa', obj6.name) // "照美冥"
+      obj6.name = '照美冥-update'
+      console.log('bbb', obj6.name) // "照美冥-update"
+
+      // 虽然configurable为false，但是writable为true，仍可以修改value
+      Object.defineProperty(obj6, 'name', {
+        value: '照美冥-update-2',
+      })
+      console.log('ccc', obj6.name) // "照美冥-update-2"
+
+      // 报错
+      // TypeError: Cannot redefine property: name
+      Object.defineProperty(obj6, 'name', {
+        configurable: true,
+      })
+      // 替换为enumerable: true、set()、get()都会报错
+
+      delete obj6.name
+      console.log('ddd', obj6.name) // "照美冥-update-2"
+      // 在严格模式下会报错
+      // TypeError: Cannot delete property 'name' of #<Object>
+      ;(() => {
+        'use strict'
+        delete obj6.name
+      })()
+
+      // 可以将writable由true改为false
+      Object.defineProperty(obj6, 'name', {
+        writable: false,
+      })
+      // 此时再改变value就会报错
+      // // TypeError: Cannot redefine property: name
+      Object.defineProperty(obj6, 'name', {
+        value: '照美冥-update-3',
+      })
+    </script>
+  </body>
+</html>

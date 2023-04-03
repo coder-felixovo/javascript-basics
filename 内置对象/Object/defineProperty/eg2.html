@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eg2</title>
+  </head>
+  <body>
+    <script>
+      // e.g.2
+      const obj2 = {
+        name: '旗木卡卡西',
+      }
+      obj2.level = '第六代火影'
+
+      // 通过赋值为对象添加的属性，能够出现在属性枚举中
+      for (prop in obj2) {
+        console.log(`obj2: ${prop}`)
+        // "obj2: name"
+        // "obj2: level"
+      }
+
+      // 可以通过赋值修改属性的值，也可以删除属性
+      obj2.name = '旗木卡卡西-update'
+      delete obj2.level
+      const res3 = Object.keys(obj2)
+
+      console.log(res3) // ['name']
+      console.log(obj2.name) // "旗木卡卡西-update"
+    </script>
+  </body>
+</html>

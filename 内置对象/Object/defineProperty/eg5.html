@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eg5</title>
+  </head>
+  <body>
+    <script>
+      // e.g.5
+      const obj5 = {}
+      Object.defineProperty(obj5, 'a', {
+        value: 97,
+        enumerable: true,
+      })
+      Object.defineProperty(obj5, 'b', {
+        value: 98,
+        enumerable: false,
+      })
+      Object.defineProperty(obj5, 'c', {
+        value: 99,
+      }) // enumerable默认false
+      obj5.d = 100
+      Object.defineProperty(obj5, Symbol.for('e'), {
+        value: 101,
+        enumerable: true,
+      })
+      Object.defineProperty(obj5, Symbol.for('f'), {
+        value: 102,
+        enumerable: false,
+      })
+      for (const prop in obj5) {
+        console.log(`obj5: ${prop}`)
+        // "obj5: a"
+        // "obj5: d"
+      }
+      console.log(Object.keys(obj5)) // ['a', 'd']
+      console.log(obj5.propertyIsEnumerable('a')) // true
+      console.log(obj5.propertyIsEnumerable('b')) // false
+      console.log(obj5.propertyIsEnumerable('c')) // false
+      console.log(obj5.propertyIsEnumerable('d')) // true
+      console.log(obj5.propertyIsEnumerable(Symbol.for('e'))) // true
+      console.log(obj5.propertyIsEnumerable(Symbol.for('f'))) // false
+      const p = { ...obj5 }
+      console.log(p.a) // 97
+      console.log(p.b) // undefined
+      console.log(p.c) // undefined
+      console.log(p.d) // 100
+      console.log(p[Symbol.for('e')]) // 101
+      console.log(p[Symbol.for('f')]) // undefined
+    </script>
+  </body>
+</html>

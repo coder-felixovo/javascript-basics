@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eg7</title>
+  </head>
+  <body>
+    <script>
+      // e.g.7
+      const obj7 = {}
+      Object.defineProperty(obj7, 'name', {
+        value: '日向雏田',
+        writable: false,
+        configurable: true,
+      })
+      Object.defineProperty(obj7, 'name', {
+        value: '日向雏田-update',
+      })
+      console.log(obj7.name) // "日向雏田-update"
+      obj7.name = '日向雏田-update-2' // writable为false，不起作用
+      console.log(obj7.name) // "日向雏田-update"
+
+      // 严格模式下报错
+      // TypeError: Cannot assign to read only property 'name' of object
+      ;(() => {
+        'use strict'
+        obj7.name = '日向雏田-update-2'
+      })()
+    </script>
+  </body>
+</html>
